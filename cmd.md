@@ -776,3 +776,13 @@ terraform providers lock  # Create lock file
 ```bash
 sudo journalctl -u customersbackend --since "1 day ago" | zstd -7 -o /tmp/customersbackend.log.zst
 ```
+
+### Export last 24h log:
+Find files named log or matching .log.*.gz in /var/log
+Modified in the last 24 hours
+Copy them to a temporary .zst archive: /tmp/logs-20-04.zst
+```bash
+sudo find /var/log -type f \( -name "*.log" -o -name "*.log.*" \) -mtime -1 -print0 | sudo tar --null -czf - --files-from=- | zstd -o /tmp/logs-20-04.zst
+```
+
+
