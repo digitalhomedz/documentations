@@ -22,3 +22,6 @@ Nginx is a popular web server and reverse proxy.
 
 ```bash
 sudo systemctl start nginx
+
+### Export customersbackend log and compress it
+sudo journalctl -u customersbackend --since "1 day ago" | zstd -7 -o /tmp/customersbackend.log.zst
